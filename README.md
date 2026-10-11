@@ -317,3 +317,161 @@ Total Budget → Avg. Budget per Campaign
 
 ----
 
+## 🔷 Dashboard Development
+
+### 🔷 1. Target Gender — Dynamic Donut Chart
+
+The **Target Gender Donut Chart** visualizes advertising performance across different gender segments using a dynamically selected KPI. The chart uses `target_gender` from the `ads` table and a **Field Parameter** to switch between Impressions, Engagements, Clicks, Shares, Comments, and Purchases.
+
+#### 🔶 Step 1: Create a Field Parameter
+
+Create a Field Parameter named **`Select Dynamic Measure`** containing the following measures:
+
+- Impressions
+- Engagements
+- Clicks
+- Shares
+- Comments
+- Purchases
+
+This parameter allows users to dynamically change the metric displayed in the donut chart without creating separate visuals for each KPI.
+
+#### 🔶 Step 2: Create a Dynamic Title
+
+**Definition:** A Dynamic Title displays the name of the KPI selected through the Field Parameter. It updates automatically whenever the user selects a different measure.
+
+```DAX
+Dynamic Title =
+IF(
+    'Select Dynamic Measure'[Select Dynamic Measure Order] = 0,
+    "Impressions",
+    IF(
+        'Select Dynamic Measure'[Select Dynamic Measure Order] = 1,
+        "Engagements",
+        IF(
+            'Select Dynamic Measure'[Select Dynamic Measure Order] = 2,
+            "Clicks",
+            IF(
+                'Select Dynamic Measure'[Select Dynamic Measure Order] = 3,
+                "Shares",
+                IF(
+                    'Select Dynamic Measure'[Select Dynamic Measure Order] = 4,
+                    "Comments",
+                    IF(
+                        'Select Dynamic Measure'[Select Dynamic Measure Order] = 5,
+                        "Purchases",
+                        "Others"
+                    )
+                )
+            )
+        )
+    )
+)
+```
+
+#### 🔶 Step 3: Create the Gender Title Measure
+
+**Definition:** The `Gender Title` measure combines the selected KPI name with the text `"by Gender"` to generate a descriptive chart title.
+
+```DAX
+Gender Title =
+SELECTEDVALUE('Select Dynamic Measure'[Dynamic Title])
+    & " by Gender"
+```
+
+**Examples of Dynamic Titles:**
+
+- Impressions by Gender
+- Engagements by Gender
+- Clicks by Gender
+- Shares by Gender
+- Comments by Gender
+- Purchases by Gender
+
+#### 🔶 Step 4: Configure the Donut Chart
+
+Configure the visual using the following fields:
+
+- **Legend:** `ads[target_gender]`
+- **Values:** `Select Dynamic Measure`
+- **Title:** `Gender Title` measure, applied through conditional formatting using **Format visual → Title → Text → fx**.
+
+#### 🔶 Step 5: Chart Insights
+
+The donut chart helps identify which **target gender segment contributes the most to the selected advertising metric**.
+
+By switching between different KPIs, the analysis can reveal:
+
+- **Impressions:** Which gender segment receives the greatest advertising exposure.
+- **Engagements:** Which segment generates the most interactions.
+- **Clicks:** Which segment shows the strongest click activity.
+- **Shares and Comments:** Which segment contributes most to these engagement actions.
+- **Purchases:** Which segment contributes the most purchase events.
+
+**Business Purpose:** This analysis helps evaluate the performance of gender-based targeting and identify opportunities to refine advertising campaigns based on the selected KPI.
+
+The results should be interpreted using the actual chart values. A higher number of impressions or engagements does not necessarily mean a higher purchase rate or better return on advertising spend.
+
+---
+
+## 🔷 2. Target Age Group — Dynamic Bar Chart
+
+The **Target Age Group Bar Chart** visualizes advertising performance across different age groups using a dynamically selected KPI. The chart uses `user_age` to analyze user activity and allows the selected metric to change through the **Select Dynamic Measure** Field Parameter.
+
+### 🔶 Step 1: Configure the Bar Chart
+
+The following fields were assigned to the visual:
+
+- **X-axis:** `users[user_age]`
+- **Y-axis:** `Select Dynamic Measure`
+- **Legend:** `Select Dynamic Measure`
+
+The Field Parameter allows users to switch dynamically between **Impressions, Engagements, Clicks, Shares, Comments, and Purchases**.
+
+### 🔶 Step 2: Apply Age Filter
+
+A visual-level filter was applied to the `user_age` column to display users aged **16 to 50 years**.
+
+**Purpose:**
+- Focus the analysis on the selected age range.
+- Exclude users outside the specified range from this visual.
+- Compare advertising performance across the included ages.
+
+### 🔶 Step 3: Create a Dynamic Chart Title
+
+**Definition:** The `Age Title` measure dynamically displays the selected KPI followed by `"by Age"`. The title updates when users change the selected metric.
+
+```DAX
+Age Title =
+SELECTEDVALUE('Select Dynamic Measure'[Dynamic Title])
+    & " by Age"
+```
+
+**Examples of Dynamic Titles:**
+
+- Impressions by Age
+- Engagements by Age
+- Clicks by Age
+- Shares by Age
+- Comments by Age
+- Purchases by Age
+
+Apply the `Age Title` measure through **Format visual → Title → Text → fx**.
+
+### 🔶 Step 4: Chart Insights
+
+The bar chart helps identify how advertising activity varies across individual ages within the selected range of **16–50 years**.
+
+By switching between KPIs, the analysis can reveal:
+
+- **Impressions:** Which ages receive the most advertising exposure.
+- **Engagements:** Which ages generate the most interactions.
+- **Clicks:** Which ages show the highest click activity.
+- **Shares and Comments:** Which ages contribute most to these interactions.
+- **Purchases:** Which ages generate the highest number of purchase events.
+
+**Business Purpose:** This analysis helps identify responsive age segments and supports data-driven audience targeting and campaign optimization.
+
+The actual chart results should be used to identify the highest-performing ages. A higher event count alone does not necessarily indicate a higher engagement rate or conversion rate.
+
+---
