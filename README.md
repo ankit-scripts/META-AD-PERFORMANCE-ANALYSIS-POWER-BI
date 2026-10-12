@@ -79,6 +79,115 @@ ad_events
 ```
 ---
 
+## 🔷 Date Table Creation
+
+Whenever working with **date values and Time Intelligence calculations** in Power BI, a dedicated **Calendar Table** is required to support date-based analysis, time filtering, and consistent reporting.
+
+### 🔶 Step 1: Create the Event Date Column
+
+**Definition:** The `Event Date` column extracts the date portion from the `timestamp` column in the `ad_events` table, removing the time component.
+
+```DAX
+Event Date =
+DATEVALUE(ad_events[timestamp])
+```
+
+### 🔶 Step 2: Create the Calendar Table
+
+**Definition:** The `Calendar Table` contains a continuous range of dates, starting from the earliest event date and ending at the latest event date in the `ad_events` table.
+
+```DAX
+Calendar Table =
+CALENDAR(
+    MIN(ad_events[Event Date]),
+    MAX(ad_events[Event Date])
+)
+```
+
+### 🔶 Step 3: Create Additional Date Columns
+
+#### 1. Month
+
+**Definition:** Returns the abbreviated month name for each date, such as Jan, Feb, and Mar.
+
+```DAX
+Month =
+FORMAT(
+    'Calendar Table'[Date],
+    "mmm"
+)
+```
+
+#### 2. Day Name
+
+**Definition:** Returns the abbreviated weekday name, such as Mon, Tue, and Wed.
+
+```DAX
+Day Name =
+FORMAT(
+    'Calendar Table'[Date],
+    "ddd"
+)
+```
+
+#### 3. Day Number
+
+**Definition:** Returns the day of the month as a number, such as 1, 2, or 31.
+
+```DAX
+Day Number =
+FORMAT(
+    'Calendar Table'[Date],
+    "d"
+)
+```
+
+#### 4. Week Day
+
+**Definition:** Returns the weekday number, with Monday = 1 and Sunday = 7.
+
+```DAX
+Week Day =
+WEEKDAY(
+    'Calendar Table'[Date],
+    2
+)
+```
+
+#### 5. Week Number
+
+**Definition:** Returns the week number of the year, using Monday as the first day of the week.
+
+```DAX
+Week Number =
+WEEKNUM(
+    'Calendar Table'[Date],
+    2
+)
+```
+
+### 🔶 Step 4: Establish the Date Relationship
+
+After creating the Calendar Table, establish the following relationship in **Model View**:
+
+- **Primary Date:** `Calendar Table[Date]`
+- **Related Date:** `ad_events[Event Date]`
+- **Cardinality:** One-to-Many (1:*)
+- **Cross-filter direction:** Single, from `Calendar Table` to `ad_events`
+
+The Calendar Table should be on the **One (1) side**, while `ad_events` should be on the **Many (*) side**.
+
+### 🔶 Step 5: Configure the Calendar Table
+
+- Mark the `Calendar Table` as a **Date Table** using its `Date` column.
+- Ensure the `Date` column has the **Date** data type.
+- Sort `Month` by a numeric month column if the months need to appear in calendar order.
+- Use the Calendar Table fields for date-based filtering and time analysis.
+
+**Purpose:** The Calendar Table supports consistent **monthly, weekly, daily, and time-based analysis** across the dashboard, including calendar heat maps and weekly performance trends.
+
+---
+
 ## 🔷 DAX Calculations
 
 After completing the **Data Transformation, Cleaning, and Data Modeling** process, the next step was to create **DAX measures** for the required business KPIs.
