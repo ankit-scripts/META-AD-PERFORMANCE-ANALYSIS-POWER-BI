@@ -584,3 +584,46 @@ By switching between KPIs, the analysis can reveal:
 The actual chart results should be used to identify the highest-performing ages. A higher event count alone does not necessarily indicate a higher engagement rate or conversion rate.
 
 ---
+
+## 🔷 3. Calendar Month — Calendar Heat Map
+
+The **Calendar Heat Map** visualizes advertising activity across weeks and days of the week. It uses the `Calendar Table` created from the `ad_events[timestamp]` column to organize event activity into a calendar structure.
+
+### 🔶 Step 1: Configure the Calendar Heat Map
+
+The following fields were assigned to the visual:
+
+- **Rows:** `Calendar Table[Week Number]`
+- **Columns:** `Calendar Table[Day Name]`
+- **Values:** `First Day Number`
+
+The calendar structure organizes dates by week and weekday, making it easier to identify daily activity patterns across the reporting period.
+
+### 🔶 Step 2: Display Performance Intensity
+
+Apply conditional formatting to the calendar visual to represent activity levels through color intensity.
+
+- **Darker shades:** Higher activity.
+- **Lighter shades:** Lower activity.
+
+This helps highlight periods of increased and decreased advertising activity.
+
+### 🔶 Step 3: Analyze Calendar Trends
+
+The calendar heat map helps identify:
+
+- **Peak Activity Days:** Dates with comparatively higher advertising activity.
+- **Low-Activity Days:** Dates with comparatively lower activity.
+- **Weekly Patterns:** Differences in activity across weekdays.
+- **Seasonal Trends:** Changes in activity across the reporting period.
+
+### 🔶 Step 4: Business Insights
+
+The calendar heat map provides a visual overview of when advertising interactions occur most frequently. It helps identify potential activity spikes associated with campaign launches, promotions, or other events.
+
+**Business Purpose:** Detect high- and low-activity periods to support campaign scheduling, performance monitoring, and advertising optimization.
+
+> **Note:** `First Day Number` is used as the calendar's date-positioning value in the current visual configuration. To make the heat map represent advertising performance intensity, use the appropriate event-count or dynamic KPI measure as the color intensity value, where supported by the selected visual.
+
+---
+
