@@ -627,3 +627,59 @@ The calendar heat map provides a visual overview of when advertising interaction
 
 ---
 
+## 🔷 4. Weekly Trend — Stacked Column Chart by Ad Type
+
+The **Weekly Trend Stacked Column Chart** visualizes advertising performance across different weeks, with each column divided into individual ad types. A dynamic KPI parameter allows users to switch between different performance metrics and compare the contribution of each ad type over time.
+
+### 🔶 Step 1: Configure the Stacked Column Chart
+
+The following fields are assigned to the visual:
+
+- **X-axis:** `Calendar Table[Week Number]`
+- **Y-axis:** `Select Dynamic Measure`
+- **Legend:** `ads[ad_type]`
+
+The **Select Dynamic Measure** Field Parameter allows users to dynamically switch between:
+
+- Impressions
+- Engagements
+- Clicks
+- Shares
+- Comments
+- Purchases
+
+Each column represents a week, while the individual stacked segments represent the contribution of different advertisement types to the selected KPI.
+
+### 🔶 Step 2: Create a Dynamic Chart Title
+
+**Definition:** The `Weekly Title` measure dynamically combines the word `"Weekly"`, the selected KPI name, and `"Trend"` to generate a descriptive chart title.
+
+```DAX
+Weekly Title =
+"Weekly "
+    & SELECTEDVALUE('Select Dynamic Measure'[Dynamic Title])
+    & " Trend"
+```
+
+Examples of Dynamic Titles:
+- Weekly Impressions Trend
+- Weekly Engagements Trend
+- Weekly Clicks Trend
+- Weekly Shares Trend
+- Weekly Comments Trend
+- Weekly Purchases Trend
+
+
+Apply the Weekly Title measure through Format visual → Title → Text → fx.
+
+### 🔶 Step 3: Analyze Weekly Performance
+The stacked column chart helps identify:
+- Weekly Trends: Changes in the selected KPI across different weeks.
+- Ad Type Contributions: Which advertisement formats contribute most to the selected metric.
+- Performance Fluctuations: Weeks with higher or lower advertising activity.
+- Format Comparisons: How the contribution of Image, Video, Carousel, and Stories ads changes over time.
+
+### 🔶 Step 4: Business Insights
+The visual provides a week-by-week comparison of advertising performance across different ad formats.
+By switching between KPIs, users can identify which formats generate the most impressions, clicks, engagements, or purchases during particular weeks.
+Business Purpose: Understand weekly performance patterns, compare ad type contributions, and identify opportunities to optimize campaign strategy and budget allocation based on the selected metric.
