@@ -724,3 +724,22 @@ Key Insights:
 
 ---
   
+## 🔷 Platform-Specific Pages and Navigation
+
+Created two separate report pages to analyze advertising performance independently for **Facebook** and **Instagram**.
+
+### 🔷 Facebook Page
+- Displays campaign performance metrics and visualizations filtered for Facebook ads.
+- Enables focused analysis of audience engagement, clicks, impressions, and purchases on Facebook.
+
+### 🔷 Instagram Page
+- Displays the same key metrics and visualizations filtered for Instagram ads.
+- Helps evaluate Instagram campaign performance and compare audience engagement and conversion outcomes.
+
+### 🔷 Page Navigation Buttons
+- Added **Facebook** and **Instagram** page navigation buttons to move easily between the two report pages.
+- Configured the buttons using Power BI's **Page Navigator** or **Page Navigation** action.
+
+**Purpose:** Separate platform-specific pages make it easier to analyze each platform independently, while navigation buttons provide a simple and user-friendly way to switch between reports.
+
+---
