@@ -683,3 +683,44 @@ The stacked column chart helps identify:
 The visual provides a week-by-week comparison of advertising performance across different ad formats.
 By switching between KPIs, users can identify which formats generate the most impressions, clicks, engagements, or purchases during particular weeks.
 Business Purpose: Understand weekly performance patterns, compare ad type contributions, and identify opportunities to optimize campaign strategy and budget allocation based on the selected metric.
+
+---
+
+### 🔷 Ad Type – Matrix
+
+The **Ad Type Matrix** compares advertising performance across different ad formats using multiple engagement and conversion metrics. It helps identify which ad types generate the most impressions, clicks, and efficient engagement and purchase outcomes.
+
+**Matrix Configuration:**
+- **Rows:** `ads[ad_type]`
+- **Columns:** None (as shown in the current configuration).
+- **Values:**
+  - `Impressions`
+  - `Clicks`
+  - `CTR (Click Through Rate)`
+  - `Purchase Rate`
+  - `Engagement Rate`
+  - `Conversion Rate`
+- **Dynamic Title Measure:**
+
+```DAX
+  Matrix Title = "Analysis by Ad Type"
+```
+
+Purpose:
+- Compare Image, Video, Carousel, and Story ad formats side by side.
+- Evaluate ad visibility, click-through performance, engagement, and purchase efficiency.
+- Identify ad formats that perform well at attracting attention versus converting clicks into purchases.
+Key Insights:
+- Use Impressions and Clicks to identify which ad formats generate the most visibility and traffic.
+- Compare CTR to assess how effectively each ad format turns impressions into clicks.
+- Compare Engagement Rate, Purchase Rate, and Conversion Rate to evaluate audience interaction and conversion efficiency.
+- Review the metrics together before deciding which ad formats deserve more budget; higher engagement or click volume alone does not necessarily mean higher purchase performance.
+
+----
+
+**Edit Interactions:** Configured **Edit Interactions** for all three charts so that selecting a specific data point in one chart filters the other charts accordingly.
+
+**Importance:** This enables interactive cross-filtering, allowing users to explore relationships between gender, age, and weekly shares and identify patterns across different audience segments and time periods.
+
+---
+  
